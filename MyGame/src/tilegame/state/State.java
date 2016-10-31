@@ -2,6 +2,8 @@ package tilegame.state;
 
 import java.awt.Graphics;
 
+import tilegame.Game;
+
 public abstract class State {
 		/**
 		 * Un estado es basicamente una condicion relativa de las variables
@@ -15,6 +17,16 @@ public abstract class State {
 		//Este atributo estatico nos dira cual es el estado que queremos cargar
 		//Y renderizar actualmente
 		private static State currentState = null;
+		
+		private Game game;
+		/**
+		 * Creo una instancia Game para facilitar las cosas
+		 */
+		public State(Game game){
+			this.game = game;
+		}
+		
+		
 		
 		//Los get y set para acceder a esta clase
 		public static void setState(State state){

@@ -4,20 +4,32 @@ import gfx.Assets;
 
 import java.awt.Graphics;
 
+import tilegame.Game;
+
 public class Player extends Creature {
 	
 	/**
-	 * 
-	 * 
+	 * Player debe tener acceso al juego...
 	 */
-
-	public Player(float x, float y) {
+	private Game game;
+	
+	public Player(Game game,float x, float y) {
 		super(x, y);
+		this.game = game;
 
 	}
 
 	@Override
 	public void tick() {
+		//LO HAGO MEDIO RANCIO, DESPUES LO ARREGLO
+		if(game.getKeyManager().isUp())
+			y-=3;
+		if(game.getKeyManager().isDown())
+			y+=3;
+		if(game.getKeyManager().isLeft())
+			x-=3;
+		if(game.getKeyManager().isRight())
+			x+=3;
 		
 	}
 

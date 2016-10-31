@@ -20,4 +20,7 @@ No entendi muy bien, pero al parecer guardas TOOODO lo del juego a cargar al pri
 
 
 actualizacion:
-
+Clases : Entity, Creature, Player
+Basicamente digo que Entity es todo en el juego que no sea fondo, Creature puede ser tanto enemigo como player
+y Player hereda de Creature. Es algo bastante simple, pero recordemos que esto es para poder mejorar la parte grafica
+de nuestro proyecto real

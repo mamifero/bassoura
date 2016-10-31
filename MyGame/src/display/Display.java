@@ -58,6 +58,9 @@ public class Display {
 		canvas.setMaximumSize(new Dimension(width,height));
 		canvas.setMinimumSize(new Dimension(width,height));
 		
+		//PARA ARREGLAR UN BUG AL HACER EL MOVIMIENTO DEL PJ
+		canvas.setFocusable(false);
+		
 		//finalmente lo añadimos al frame
 		frame.add(canvas);
 		//es para ver el canvas en toda la ventana, ya que a veces
@@ -71,5 +74,8 @@ public class Display {
 		return canvas;
 	}
 	
+	public JFrame getFrame(){
+		return frame;
+	}
 	
 }

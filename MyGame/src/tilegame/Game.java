@@ -36,16 +36,32 @@ public class Game implements Runnable {
 	private State gameState;
 	private State menuState;
 	
+	//Input
+	private KeyManager keyManager;
+	
+	public Game(String title, int width, int height){
+		//Cada vez que creo una instancia de juego, se crea
+		//automaticamente el display
+		this.width = width;
+		this.height = height;
+		this.title = title;
+		this.keyManager = new KeyManager();
+		
+	}
+	
 	private void init(){
 		//Este metodo seria el que va a inicializar
 		//todos los graficos del juego
 		
 		display = new Display(title,width,height);
+		//Para poder acceder al teclado
+		display.getFrame().addKeyListener(keyManager);
+		
 		Assets.init();
 		//Esto lo puedo hacer porque GameState hereda de State, que es abstracta
 		//Inicializo todos los es tados
-		gameState = new GameState();
-		menuState = new MenuState();
+		gameState = new GameState(this);
+		menuState = new MenuState(this);
 		State.setState(gameState);
 	}
 	
@@ -59,6 +75,9 @@ public class Game implements Runnable {
 
 	
 	private void tick(){
+		//Antes que nada, updateo el teclado
+		keyManager.tick();
+		
 		//Si no habia un state, hace el tick. copio el mismo codigo en render
 		if(State.getState()!= null)
 			State.getState().tick();
@@ -149,6 +168,9 @@ public class Game implements Runnable {
 	 */
 	
 
+		public KeyManager getKeyManager(){
+			return keyManager;
+		}
 	
 	//Start y stop inician y paran el hilo 
 	public synchronized void start(){
@@ -197,15 +219,6 @@ public class Game implements Runnable {
 	
 	
 
-	
-	public Game(String title, int width, int height){
-		//Cada vez que creo una instancia de juego, se crea
-		//automaticamente el display
-		this.width = width;
-		this.height = height;
-		this.title = title;
 
-		
-	}
 	
 }
