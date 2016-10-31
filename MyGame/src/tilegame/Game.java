@@ -26,6 +26,7 @@ public class Game implements Runnable {
 	private boolean running = false; //para controlar el run del juego
 
 	//Para el render
+	//
 
 	private BufferStrategy bs;
 	private Graphics gr;
@@ -108,7 +109,7 @@ public class Game implements Runnable {
 		// now se inicia al principio del loop, me dice cuando empiezo a contar
 		long now;
 		//LastTime retorna el tiempo de nuestra compu en nanosegundos
-		long lastTime = System.nanoTime();
+		long lastTime = System.nanoTime(); //Sería el tiempo actual en nanosegundos
 		long timer = 0;
 		int ticks = 0;
 		
