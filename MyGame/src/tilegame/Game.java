@@ -1,16 +1,15 @@
 package tilegame;
 
 import gfx.Assets;
-import gfx.ImageLoader;
-import gfx.SpriteSheet;
 
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 
 import tilegame.state.GameState;
+import tilegame.state.MenuState;
 import tilegame.state.State;
 import display.Display;
+
 
 public class Game implements Runnable {
 	/**
@@ -35,6 +34,7 @@ public class Game implements Runnable {
 	
 	//states
 	private State gameState;
+	private State menuState;
 	
 	private void init(){
 		//Este metodo seria el que va a inicializar
@@ -43,7 +43,9 @@ public class Game implements Runnable {
 		display = new Display(title,width,height);
 		Assets.init();
 		//Esto lo puedo hacer porque GameState hereda de State, que es abstracta
+		//Inicializo todos los es tados
 		gameState = new GameState();
+		menuState = new MenuState();
 		State.setState(gameState);
 	}
 	
@@ -90,7 +92,7 @@ public class Game implements Runnable {
 		//Limpiar pantalla
 		gr.clearRect(0, 0, width, height);
 		
-		//gr.drawImage(Assets.player, x, 0, null);
+
 		if(State.getState()!= null)
 			State.getState().render(gr);
 		
@@ -115,8 +117,6 @@ public class Game implements Runnable {
 		long now;
 		//LastTime retorna el tiempo de nuestra compu en nanosegundos
 		long lastTime = System.nanoTime(); //Sería el tiempo actual en nanosegundos
-		long timer = 0;
-		int ticks = 0;
 		
 		
 		while(running){
@@ -125,7 +125,6 @@ public class Game implements Runnable {
 			//Basicamente el delta, segun un tiempo, le dice
 			//si necesitamos llamar a tick y a render
 			delta += (now - lastTime)/timePerTick;
-			timer+= (now-lastTime);
 			lastTime = now;
 			
 			
@@ -133,14 +132,9 @@ public class Game implements Runnable {
 			tick();
 			render();
 			delta--;
-			ticks++;
 			}
 			//Esto es para saber si nuestro juego corre a 60 fps
-			if(timer>=1000000000){
-				System.out.println("ticks and frames "+ticks);
-				ticks =0;
-				timer = 0;
-			}
+
 		}
 		
 		stop();
