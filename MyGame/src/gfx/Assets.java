@@ -10,7 +10,7 @@ public class Assets {
 	 */
 	
 	//Estos serian los tipos de imagenes a usar
-	public static BufferedImage player, grass, tree, spongebob;
+	public static BufferedImage player, grass, tree, spongebob, background, guiCombat;
 	//Esto es para no hardcodear cada tamaño de imagen 
 	//Agarro y digo que todos mis sprites tienen este alto y ancho
 	private static final int width = 64, height = 64;
@@ -23,6 +23,8 @@ public class Assets {
 		tree = sheet.crop(width, 0, width, height);
 		grass = sheet.crop(0, height, width, height);
 		spongebob = sheet.crop(width, height, width, height);
+		background = ImageLoader.loadImage("/textures/forestbackground.jpg");
+		guiCombat = ImageLoader.loadImage("/textures/menu.jpg");
 		
 	}
 	

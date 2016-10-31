@@ -40,8 +40,7 @@ public class KeyManager implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent id) {
 		//keycode me da el codigo de la tecla ingresada
-			keys[id.getKeyCode()] = true;
-			System.out.println("macri gato");
+		keys[id.getKeyCode()] = true;
 	}
 	
 	//Cuando las soltas...
