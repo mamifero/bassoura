@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
+import tilegame.state.GameState;
+import tilegame.state.State;
 import display.Display;
 
 public class Game implements Runnable {
@@ -31,8 +33,8 @@ public class Game implements Runnable {
 	private BufferStrategy bs;
 	private Graphics gr;
 	
-	//test
-
+	//states
+	private State gameState;
 	
 	private void init(){
 		//Este metodo seria el que va a inicializar
@@ -40,8 +42,9 @@ public class Game implements Runnable {
 		
 		display = new Display(title,width,height);
 		Assets.init();
-		
-		
+		//Esto lo puedo hacer porque GameState hereda de State, que es abstracta
+		gameState = new GameState();
+		State.setState(gameState);
 	}
 	
 	
@@ -52,10 +55,11 @@ public class Game implements Runnable {
 	 * basicamente seria un update de algo
 	 */
 
-	int x=0;
 	
 	private void tick(){
-			x++;
+		//Si no habia un state, hace el tick. copio el mismo codigo en render
+		if(State.getState()!= null)
+			State.getState().tick();
 	}
 	
 	//render lo que hace es dibujar cosas en la pantalla, for dummies
@@ -86,8 +90,9 @@ public class Game implements Runnable {
 		//Limpiar pantalla
 		gr.clearRect(0, 0, width, height);
 		
-		gr.drawImage(Assets.player, x, 0, null);
-		
+		//gr.drawImage(Assets.player, x, 0, null);
+		if(State.getState()!= null)
+			State.getState().render(gr);
 		
 		bs.show();
 		gr.dispose();
