@@ -1,0 +1,23 @@
+---Launcher---
+La clase launcher lo unico que hace es lanzar el juego
+---Display---
+La clase display va a mostrar la ventana principal del juego (con un alto, ancho y titulo), y tiene el "canvas" donde vas a dibujar todo lo que va a aparecer en la pantalla (el canvas tiene las mismas dimensiones que la ventana).
+
+---Game---
+En la clase Game va todo lo referido a los hilos de ejecución del juego. Por defecto, Game va a ser un Runnable, y va a tener su propio hilo de ejecución. 
+Dentro de Game, tenemos los metodos start, stop y run. Dentro de run, tenemos tick y render.
+Start y stop inician y terminan el hilo de manera segura.
+
+Run nos dice todo lo que va a hacer el programa, por el momento es un while controlado por un booleano. En cada iteración, run va a actualizar la pantalla con los cambios (tick), y va a graficar todos los sprites que le digamos (render).
+
+Para renderizar imagenes, Java busca el sprite (nosotros le decimos la ruta del archivo), lo carga en un buffer, lo recorta y lo carga en otro buffer, para poder utilizarlo. El crop (corte) de la imagen se hace con coordenadas en X-Y. El grafico recortado es almacenado en un objeto BufferedImage y puede ser mostrado con un objeto Graphics.
+
+---ImageLoader---
+Basicamente lo que hace es retornar el BufferedImage de la ruta de imagen que le digamos.
+
+---Assets---
+No entendi muy bien, pero al parecer guardas TOOODO lo del juego a cargar al principio, es decir imagenes, sonidos, textos, etc.
+
+
+actualizacion:
+
